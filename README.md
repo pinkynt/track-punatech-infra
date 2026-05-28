@@ -17,6 +17,8 @@ This repository contains a complete Supabase Docker Compose stack based on the o
 |---|---:|---|
 | Kong | `51000:8000` | Host fallback for the Supabase API gateway; Dokploy should route to internal port `8000` |
 
+The host port is configured with `SUPABASE_KONG_HTTP_PORT=51000`. Do not use the old `KONG_HTTP_PORT` variable in Dokploy; it is intentionally ignored to avoid stale environment overrides.
+
 Do not expose internal services like `auth`, `rest`, `storage`, or `studio` directly. Kong routes them safely under one public origin.
 
 Supavisor is intentionally not published to the host by default. This avoids collisions with an existing Postgres on the VPS and keeps database access private to the Docker network. If external database access is required later, expose it deliberately with firewall/IP allowlisting.
