@@ -8,15 +8,14 @@ This repository contains a complete Supabase Docker Compose stack based on the o
 2. Update `SUPABASE_PUBLIC_URL`, `API_EXTERNAL_URL`, `SITE_URL`, and SMTP values.
 3. In Dokploy, create a Compose app from this repository.
 4. Paste the generated `.env` values into the Dokploy environment editor.
-5. Attach your public domain to port `8000` through Dokploy/Traefik.
+5. Attach your public domain to the `kong` service on internal port `8000` through Dokploy/Traefik.
 6. Deploy and verify Studio at `https://your-domain` and API routes with the generated `ANON_KEY`.
 
 ## Exposed Services
 
 | Service | Port | Purpose |
 |---|---:|---|
-| Kong | `8000` | Public Supabase API gateway and Studio route |
-| Kong HTTPS | `8443` | Optional direct HTTPS listener, usually unused behind Dokploy |
+| Kong | `51000:8000` | Host fallback for the Supabase API gateway; Dokploy should route to internal port `8000` |
 
 Do not expose internal services like `auth`, `rest`, `storage`, or `studio` directly. Kong routes them safely under one public origin.
 
