@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+
+# Runtime data is stored in Docker named volumes. Keep accidental bind data out of Git.
+volumes/db/data/
+volumes/storage/
+
+.DS_Store
+
+# Local AI/tooling cache; contains machine-specific absolute paths.
+.atl/
