@@ -17,10 +17,10 @@ This repository contains a complete Supabase Docker Compose stack based on the o
 |---|---:|---|
 | Kong | `8000` | Public Supabase API gateway and Studio route |
 | Kong HTTPS | `8443` | Optional direct HTTPS listener, usually unused behind Dokploy |
-| Supavisor session pooler | `5432` | PostgreSQL session connections |
-| Supavisor transaction pooler | `6543` | PostgreSQL transaction pool connections |
 
 Do not expose internal services like `auth`, `rest`, `storage`, or `studio` directly. Kong routes them safely under one public origin.
+
+Supavisor is intentionally not published to the host by default. This avoids collisions with an existing Postgres on the VPS and keeps database access private to the Docker network. If external database access is required later, expose it deliberately with firewall/IP allowlisting.
 
 ## Dokploy Notes
 
